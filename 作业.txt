@@ -1,0 +1,42 @@
+import matplotlib
+from datasciense import 
+import matplotlib.pyplot as plt
+
+def extract_rank(data,name):
+    temp = data.where('姓名',are.equal_to(name)).column(11).item(0)
+    return temp
+
+data1 = Table.read_table('d:\\20211105-utf-8')
+data2 = Table.read_table('d:\\20211106-utf-8')
+data3 = Table.read_table('d:\\20211107-utf-8')
+data4 = Table.read_table('d:\\20211108-utf-8')
+data5 = Table.read_table('d:\\20211109-utf-8')
+data6 = Table.read_table('d:\\20211110-utf-8')
+data7 = Table.read_table('d:\\20211109-1-utf-8')
+
+name = '刘翔'
+
+rank1 = extract_rank(data1,name)
+rank2 = extract_rank(data2,name)
+rank3 = extract_rank(data3,name)
+rank4 = extract_rank(data4,name)
+rank5 = extract_rank(data5,name)
+rank6 = extract_rank(data6,name)
+rank7 = extract_rank(data7,name)
+
+rank_array = make_array(rank1,rank2,rank3,rank4,rank5,rank6,rank7)
+number_of_exam = make_array(1,2,3,4,5,6,7)
+
+results = Table().with_colums('考试序号',number_of_exam,'姓名',make_array(name,name,name,name,name,name,name),'级名',rank1,rank2,rank3,rank4,rank5,rank6,rank7)
+results.show()
+
+plt.plot(number_of_exam,rank_array,'o--b',label = name)
+
+plt.xlabel('历次考试')
+plt.ylabel('年纪排名')
+
+plt.axis([0,10,650,300])
+plt.legend(loc = 'upper right')
+plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']
+plt.grid()
+plt.show()
